@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eCommerce Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <!-- Modified Header with Cart Count -->
+<header class="bg-black text-white position-fixed top-0 w-full z-40">
+    <div class="max-w-screen-xl mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl font-bold">RILEY FRENCH</a>
+        
+        <!-- Navigation Menu (visible on medium screens and up) -->
+        <nav class="hidden md:flex space-x-6">
+            <a href="#" class="hover:text-gray-300">Home</a>
+            <a href="#" class="hover:text-gray-300">Shop</a>
+            <a href="#" class="hover:text-gray-300">Contact</a>
+            <a href="#" id="desktop-cart" class="hover:text-gray-300 relative">
+                Cart
+                <span id="desktop-cart-count" class="absolute -top-2 -right-4 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+            </a>
+        </nav>
+
+        <!-- Mobile Menu Button (visible on small screens) -->
+        <div class="md:hidden flex items-center space-x-4">
+            <a href="#" id="mobile-cart" class="relative">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <span id="mobile-cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+            </a>
+            <button id="mobile-menu-button" class="text-white focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+  
+    <!-- Mobile Menu (hidden by default) -->
+    <div id="mobile-menu" class="md:hidden bg-black text-white space-y-4 py-4 px-4 hidden absolute top-15 left-0 right-0 z-10">
+        <a href="#" class="block hover:text-gray-300">Home</a>
+        <a href="#" class="block hover:text-gray-300">Shop</a>
+        <a href="#" class="block hover:text-gray-300">Contact</a>
+        <a href="#" id="mobile-menu-cart" class="block hover:text-gray-300">Cart</a>
+    </div>
+</header>
+
+
+<div id="cart-sidebar" class="fixed inset-y-0 right-0 w-80 bg-white z-50 shadow-xl transform transition-transform duration-300 ease-in-out translate-x-full">
+    <div class="flex flex-col h-full">
+        <div class="p-4 border-b flex justify-between items-center">
+            <h2 class="text-xl font-bold">Your Cart</h2>
+            <button id="close-cart" class="text-gray-500 hover:text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div id="cart-items" class="flex-grow overflow-y-auto p-4">
+            <!-- Cart items will be displayed here -->
+            <div class="text-center text-gray-500 py-8">Your cart is empty</div>
+        </div>
+        <div class="p-4 border-t mt-auto">
+            <div class="flex justify-between mb-4">
+                <span class="font-semibold">Total:</span>
+                <span id="cart-total" class="font-bold">$0.00</span>
+            </div>
+            <button id="checkout-button" class="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition">
+                Checkout
+            </button>
+        </div>
+    </div>
+</div>
+
+</header>
+
+<!-- Hero Section -->
+<section class="relative bg-blue-200">
+    <!-- Hero Image -->
+    <img src="woman-97088.jpg" alt="Image" class="h-[80vh] w-full ">
+</section>
+
+    <!-- Product Grid Section -->
+    <section class="py-12">
+        <div class="max-w-screen-xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Plain tees</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Product Card 1 -->
+                <div class="bg-white border rounded-lg shadow-md hover:shadow-lg overflow-hidden">
+                    <img src="pexels-sora-shimazaki-5926280.jpg" alt="Product Image" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl text-gray-800">Product Name</h3>
+                        <p class="text-gray-600 mt-2">Product description goes here.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-semibold text-gray-900">$25.00</span>
+                            <button class="bg-black text-white px-4 py-2 rounded hover:bg-black">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>      
+
+                <!-- Product Card 2 -->
+                <div class="bg-white border rounded-lg shadow-md hover:shadow-lg overflow-hidden">
+                    <img src="pexels-sora-shimazaki-5926280.jpg" alt="Product Image" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl text-gray-800">Product Name</h3>
+                        <p class="text-gray-600 mt-2">Product description goes here.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-semibold text-gray-900">$25.00</span>
+                            <button class="bg-black text-white px-4 py-2 rounded hover:bg-black">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="bg-white border rounded-lg shadow-md hover:shadow-lg overflow-hidden">
+                    <img src="pexels-sora-shimazaki-5926280.jpg" alt="Product Image" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl text-gray-800">Product Name</h3>
+                        <p class="text-gray-600 mt-2">Product description goes here.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-semibold text-gray-900">$25.00</span>
+                            <button class="bg-black text-white px-4 py-2 rounded hover:bg-black">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="bg-white border rounded-lg shadow-md hover:shadow-lg overflow-hidden">
+                    <img src="pexels-sora-shimazaki-5926280.jpg" alt="Product Image" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl text-gray-800">Product Name</h3>
+                        <p class="text-gray-600 mt-2">Product description goes here.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-semibold text-gray-900">$25.00</span>
+                            <button class="bg-black text-white px-4 py-2 rounded hover:bg-black">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+    </section>
+
+    <section class="py-12">
+        <div class="max-w-screen-xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Plain tees</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Product Card 1 -->
+                <div class="bg-white border rounded-lg shadow-md hover:shadow-lg overflow-hidden">
+                    <img src="pexels-sora-shimazaki-5926280.jpg" alt="Product Image" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl text-gray-800">Product Name</h3>
+                        <p class="text-gray-600 mt-2">Product description goes here.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-semibold text-gray-900">$25.00</span>
+                            <button class="bg-black text-white px-4 py-2 rounded hover:bg-black">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>      
+
+                <!-- Product Card 2 -->
+                <div class="bg-white border rounded-lg shadow-md hover:shadow-lg overflow-hidden">
+                    <img src="pexels-sora-shimazaki-5926280.jpg" alt="Product Image" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl text-gray-800">Product Name</h3>
+                        <p class="text-gray-600 mt-2">Product description goes here.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-semibold text-gray-900">$25.00</span>
+                            <button class="bg-black text-white px-4 py-2 rounded hover:bg-black">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="bg-white border rounded-lg shadow-md hover:shadow-lg overflow-hidden">
+                    <img src="pexels-sora-shimazaki-5926280.jpg" alt="Product Image" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl text-gray-800">Product Name</h3>
+                        <p class="text-gray-600 mt-2">Product description goes here.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-semibold text-gray-900">$25.00</span>
+                            <button class="bg-black text-white px-4 py-2 rounded hover:bg-black">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="bg-white border rounded-lg shadow-md hover:shadow-lg overflow-hidden">
+                    <img src="pexels-sora-shimazaki-5926280.jpg" alt="Product Image" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl text-gray-800">Product Name</h3>
+                        <p class="text-gray-600 mt-2">Product description goes here.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-semibold text-gray-900">$25.00</span>
+                            <button class="bg-black text-white px-4 py-2 rounded hover:bg-black">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+    </section>
+
+
+
+
+    <!-- Hero Section -->
+<section class="relative bg-blue-200">
+    <!-- Hero Image -->
+    <img src="woman-97088.jpg" alt="Image" class="h-[80vh] w-full ">
+</section>
+
+       <!-- Product Grid Section -->
+       <section class="py-12">
+        <div class="max-w-screen-xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Hoodie</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Product Card 1 -->
+                <div class="bg-white border rounded-lg shadow-md hover:shadow-lg overflow-hidden">
+                    <img src="pexels-sora-shimazaki-5926280.jpg" alt="Product Image" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl text-gray-800">Product </h3>
+                        <p class="text-gray-600 mt-2">Product description goes here.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-semibold text-gray-900">$25.00</span>
+                            <button class="bg-black text-white px-4 py-2 rounded hover:bg-gray-50">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+         
+                <div class="bg-white border rounded-lg shadow-md hover:shadow-lg overflow-hidden">
+                    <img src="pexels-sora-shimazaki-5926280.jpg" alt="Product Image" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl text-gray-800">Product Name</h3>
+                        <p class="text-gray-600 mt-2">Product description goes here.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-semibold text-gray-900">$25.00</span>
+                            <button class="bg-black text-white px-4 py-2 rounded hover:bg-black">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="bg-white border rounded-lg shadow-md hover:shadow-lg overflow-hidden">
+                    <img src="https://via.placeholder.com/300" alt="Product Image" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl text-gray-800">Product Name</h3>
+                        <p class="text-gray-600 mt-2">Product description goes here.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-semibold text-gray-900">$25.00</span>
+                            <button class="bg-black text-white px-4 py-2 rounded hover:bg-black">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="bg-white border rounded-lg shadow-md hover:shadow-lg overflow-hidden">
+                    <img src="https://via.placeholder.com/300" alt="Product Image" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl text-gray-800">Product Name</h3>
+                        <p class="text-gray-600 mt-2">Product description goes here.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-semibold text-gray-900">$25.00</span>
+                            <button class="bg-black text-white px-4 py-2 rounded hover:bg-black">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+    </section>
+
+    <!-- Hero Section -->
+<section class="relative bg-blue-200">
+    <!-- Hero Image -->
+    <img src="woman-97088.jpg" alt="Image" class="h-[80vh] w-full ">
+</section>
+
+       <!-- Product Grid Section -->
+       <section class="py-12">
+        <div class="max-w-screen-xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Featured Products</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Product Card 1 -->
+                <div class="bg-white border rounded-lg shadow-md hover:shadow-lg overflow-hidden">
+                    <img src="https://via.placeholder.com/300" alt="Product Image" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl text-gray-800">Product Name</h3>
+                        <p class="text-gray-600 mt-2">Product description goes here.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-semibold text-gray-900">$25.00</span>
+                            <button class="bg-black text-white px-4 py-2 rounded hover:bg-black">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="bg-white border rounded-lg shadow-md hover:shadow-lg overflow-hidden">
+                    <img src="https://via.placeholder.com/300" alt="Product Image" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl text-gray-800">Product Name</h3>
+                        <p class="text-gray-600 mt-2">Product description goes here.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-semibold text-gray-900">$35.00</span>
+                            <button class="bg-black text-white px-4 py-2 rounded hover:bg-blue-700">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="bg-white border rounded-lg shadow-md hover:shadow-lg overflow-hidden">
+                    <img src="https://via.placeholder.com/300" alt="Product Image" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl text-gray-800">Product Name</h3>
+                        <p class="text-gray-600 mt-2">Product description goes here.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-semibold text-gray-900">$50.00</span>
+                            <button class="bg-black text-white px-4 py-2 rounded hover:bg-blue-700">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="bg-white border rounded-lg shadow-md hover:shadow-lg overflow-hidden">
+                    <img src="https://via.placeholder.com/300" alt="Product Image" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-xl text-gray-800">Product Name</h3>
+                        <p class="text-gray-600 mt-2">Product description goes here.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-semibold text-gray-900">$60.00</span>
+                            <button class="bg-black text-white px-4 py-2 rounded hover:bg-blue-700">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section with Social Media -->
+<footer class="bg-black text-white py-8">
+    <div class="max-w-screen-xl mx-auto px-4">
+        <!-- Footer Content Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Company Info -->
+            <div>
+                <h3 class="text-xl font-bold mb-4">RILEY FRENCH</h3>
+                <p class="text-gray-300 mb-4">Premium clothing for the modern individual. Quality materials, sustainable practices.</p>
+                <div class="flex space-x-4">
+                    <!-- Social Media Icons -->
+                    <a href="#" class="text-white hover:text-gray-300 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22 5.92a8.5 8.5 0 0 1-2.45.67 4.27 4.27 0 0 0 1.87-2.35 8.5 8.5 0 0 1-2.7 1.03 4.26 4.26 0 0 0-7.25 3.88A12.1 12.1 0 0 1 3 4.74a4.26 4.26 0 0 0 1.32 5.68 4.25 4.25 0 0 1-1.93-.53v.05a4.26 4.26 0 0 0 3.41 4.17 4.3 4.3 0 0 1-1.92.07 4.26 4.26 0 0 0 3.98 2.95A8.55 8.55 0 0 1 2 19.17a12.08 12.08 0 0 0 6.54 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19 0-.37-.01-.56a8.68 8.68 0 0 0 2.14-2.23l.04-.08.09-.1z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-white hover:text-gray-300 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-white hover:text-gray-300 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-white hover:text-gray-300 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M13.54 2.26c.96.3 1.4.78 1.87 1.36.46.48 1.96 1.74 1.96 1.74.6.67 1.16.83 1.94.83h.01c1.34-.07 2.05-.06 3.18-.06 1.13 0 1.35.15 1.35.91.06 1.92-3.55 7.71-5.37 10.26-2.91 3.89-3.85 1.96-5.15 2.26h-.01c-1.52.3-1.52-3.39.15-9.02.28-.94.13-1.64-.21-2.13 0 0-.34-.3-.89-.82-.55-.54-.84-.85-.84-.85-.45-.53-.66-1.11-.73-1.82v-.12c0-.79.39-1.51.92-1.92.41-.32.88-.54 1.37-.65.5-.1.99-.08 1.45.03zm-4.21 10.31v-.06c-.11-2.91-.86-5.23-2.94-5.59h-.01c-1.25-.18-2.38.35-3.29 1.29a6.35 6.35 0 0 0-1.74 3.12c-.33 1.12-.52 2.26-.59 3.44v.12c.04 1.19.21 2.38.49 3"/>
+
+
+                        </svg>       
+                    </footer>                  
+
+    <script src="index.js"></script>
+
+</body>
+</html>
