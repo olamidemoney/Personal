@@ -216,21 +216,99 @@ function loadCart() {
     }
 }
 
+
 function handleCheckout() {
     if (cart.length === 0) {
         alert('Your cart is empty!');
         return;
     }
     
-    alert('Thank you for your order! This is where the checkout process would begin.');
+    // Create a modal overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
     
-    // In a real application, you would redirect to a checkout page or open a modal
-    // For this demo, we'll just clear the cart
-    cart = [];
-    saveCart();
-    updateCartUI();
-    toggleCartSidebar();
-}
+    // Create the checkout form
+    const formContainer = document.createElement('div');
+    formContainer.className = 'bg-white p-6 rounded-lg shadow-xl max-w-md w-full';
+    
+    formContainer.innerHTML = `
+        <h2 class="text-xl font-bold mb-4">Complete Your Order</h2>
+        <form id="checkout-form" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Full Name</label>
+                <input type="text" id="customer-name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">WhatsApp Number</label>
+                <input type="tel" id="customer-whatsapp" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Email Address</label>
+                <input type="email" id="customer-email" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div class="flex space-x-3 pt-2">
+                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Complete Order
+                </button>
+                <button type="button" id="cancel-checkout" class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    `;
+    
+    overlay.appendChild(formContainer);
+    document.body.appendChild(overlay);
+    
+    // Cancel button functionality
+    document.getElementById('cancel-checkout').addEventListener('click', function() {
+        document.body.removeChild(overlay);
+    });
+    
+    // Form submission handler
+    document.getElementById('checkout-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const customerName = document.getElementById('customer-name').value;
+        const customerWhatsapp = document.getElementById('customer-whatsapp').value;
+        const customerEmail = document.getElementById('customer-email').value;
+        
+        // Prepare cart items for the message
+        let cartItems = '';
+        let totalAmount = 0;
+        
+        cart.forEach((item, index) => {
+            cartItems += `${index + 1}. ${item.name} - ${item.quantity} x $${item.price} = $${(item.quantity * item.price).toFixed(2)}\n`;
+            totalAmount += item.quantity * item.price;
+        });
+        
+        // Format the WhatsApp message
+        const message = encodeURIComponent(
+            `*New Order*\n\n` +
+            `*Customer Details:*\n` +
+            `Name: ${customerName}\n` +
+            `WhatsApp: ${customerWhatsapp}\n` +
+            `Email: ${customerEmail}\n\n` +
+            `*Order Details:*\n${cartItems}\n` +
+            `*Total: $${totalAmount.toFixed(2)}*`
+        );
+        
+        // The phone number should be the business number without any symbols
+        const phoneNumber = '2348102974538'; // Replace with your WhatsApp business number
+        
+        // Create WhatsApp URL and open it
+        window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+        
+        // Clean up
+        document.body.removeChild(overlay);
+        cart = [];
+        saveCart();
+        updateCartUI();
+        toggleCartSidebar();
+        
+        alert('Thank you for your order! You will be redirected to WhatsApp to complete your purchase.');
+    });
+}     
 
 // Optional: Close cart when clicking outside
 document.addEventListener('click', (e) => {
